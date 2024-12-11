@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { LuLoader } from "react-icons/lu";
+import { BACKEND_URL } from "../config";
 
 const Blogs = () => {
   const [blogData, setBlogData] = useState([]);
@@ -30,7 +31,7 @@ const Blogs = () => {
 
   const handleCreatePost = async () => {
     try {
-      await axios.post("http://localhost:3001/api/posts", {
+      await axios.post(`${BACKEND_URL}/api/posts`, {
         title,
         excerpt,
         content,
@@ -46,7 +47,7 @@ const Blogs = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/posts?verified=true");
+        const response = await axios.get(`${BACKEND_URL}/api/posts?verified=true`);
         setBlogData(response.data);
         setLoading(false);
       } catch (error) {
